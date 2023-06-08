@@ -1,0 +1,14 @@
+"","Phi","p","model","npar","AICc","DeltaAICc","weight","Deviance"
+"7","~time + origin + fl + year + dis","~time + year","Phi(~time + origin + fl + year + dis)p(~time + year)",25,13385.3263481276,0,0.920120823200234,13335.257
+"11","~time + origin + year + dis","~time + year","Phi(~time + origin + year + dis)p(~time + year)",24,13390.4500102416,5.12366211403787,0.0709995780429527,13342.386
+"4","~time + dis + year","~time + year","Phi(~time + dis + year)p(~time + year)",23,13394.6078862812,9.28153815360383,0.00887941711088622,13348.549
+"8","~time + origin + fl + year","~time + year","Phi(~time + origin + fl + year)p(~time + year)",24,13416.3660102416,31.0396621140371,1.67366244494615e-07,13368.302
+"10","~time + origin + year + diff","~time + year","Phi(~time + origin + year + diff)p(~time + year)",24,13421.5490102416,36.222662114038,1.25370027555948e-08,13373.485
+"12","~time + origin + year","~time + year","Phi(~time + origin + year)p(~time + year)",23,13426.3338862812,41.0075381536026,1.14596430707485e-09,2906.9052
+"13","~time + origin + year + ss","~time + year","Phi(~time + origin + year + ss)p(~time + year)",24,13427.6390102416,42.3126621140382,5.96715094543772e-10,13379.575
+"6","~time + origin + fl","~time + year","Phi(~time + origin + fl)p(~time + year)",22,13476.7049762121,91.3786280844633,0,13432.651
+"5","~time + origin + fl + dis","~time + year","Phi(~time + origin + fl + dis)p(~time + year)",23,13478.0538862812,92.7275381536037,0,13431.995
+"9","~time + origin","~time + year","Phi(~time + origin)p(~time + year)",21,13488.22928,102.902931872399,0,2972.8104
+"3","~time + dis","~time + year","Phi(~time + dis)p(~time + year)",21,13504.65628,119.329931872398,0,13462.607
+"2","~origin + year + dis","~time + year","Phi(~origin + year + dis)p(~time + year)",16,13851.6290055985,466.302657470907,0,13819.6
+"1","~1","~time + year","Phi(~1)p(~time + year)",12,13943.1276320166,557.801283889032,0,3445.7409
