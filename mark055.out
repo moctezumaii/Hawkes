@@ -1,11 +1,11 @@
 
    Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:12    Page  001
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  001
     
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
    Welcome to MARK amolina6 on machine 6ZB4TV3 in subdirectory 
-   "C:\Users\amolina6\OneDrive - University of Tennessee\Documents\projects\Hawkes" running file "mark085.inp".
+   "C:\Users\amolina6\OneDrive - University of Tennessee\Documents\projects\Hawkes" running file "mark055.inp".
    This version was compiled by GCC version 12.2.0 using the options: 
      -cpp -iprefix c:\tdm-gcc-64\mingw64\bin\../lib/gcc/x86_64-w64-mingw32/12.2.0/
      -D_MT -D_REENTRANT -U_REENTRANT -D ieee -D dbleprecision -m64 -mtune=generic
@@ -54,7 +54,7 @@
    For procedure chmatrix CPU Time was 0.001 seconds and System Time was 0.001 seconds       .
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:12    Page  002
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  002
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
 
@@ -105,7 +105,7 @@
 
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:12    Page  003
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  003
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
   INPUT ---    group=4 Phi    rows=10 cols=10 Triang ;
@@ -156,7 +156,7 @@
   INPUT ---        19 38 ;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  004
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  004
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
   INPUT ---        38 ;
@@ -207,7 +207,7 @@
   INPUT ---        35 36 37 38 ;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  005
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  005
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
   INPUT ---        36 37 38 ;
@@ -258,7 +258,7 @@
   INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  006
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  006
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
   INPUT ---        0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1;
@@ -309,7 +309,7 @@
   INPUT ---       rlabel(15)=p ghatchery2010 c1 a30.63 t31.63;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  007
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:26    Page  007
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
   INPUT ---       rlabel(16)=p ghatchery2010 c1 a34.5 t35.5;
@@ -344,7 +344,7 @@
  Effective Sample Size = 18772
 
  Number of function evaluations was 132 for 22 parameters.
- For numerical optimization, CPU Time was 5.422 seconds and System Time was 0.515 seconds.
+ For numerical optimization, CPU Time was 5.125 seconds and System Time was 0.547 seconds.
  -2logL { Phi(~time + ss)p(~time + year) } = 13462.722     
  Penalty { Phi(~time + ss)p(~time + year) } = 0.0000000     
  Gradient { Phi(~time + ss)p(~time + year) }:
@@ -354,7 +354,7 @@
  -0.23415749E-02  0.25553406E-03 -0.10081162E-02  0.60431688E-03   0.0000000    
  -0.39300476E-03  0.96533490E-03
  Maximum ABS(G) { Phi(~time + ss)p(~time + year) } = 0.0080663     
- To compute VC matrix, CPU Time was 1.484 seconds and System Time was 0.282 seconds.
+ To compute VC matrix, CPU Time was 1.891 seconds and System Time was 0.297 seconds.
  S Vector { Phi(~time + ss)p(~time + year) }:
    1251.639      1173.083      270.7739      262.4252      150.5493    
    144.0922      141.6382      137.6675      127.6406      99.06371    
@@ -382,7 +382,7 @@
  Fletcher chat { Phi(~time + ss)p(~time + year) } = 4.0137393               
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  008
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:27    Page  008
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
 
@@ -433,7 +433,7 @@
      7:Phi ghatchery2010 c1   0.9914762       0.8614842E-03   0.9896107       0.9930091       
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  009
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:27    Page  009
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
      8:Phi ghatchery2010 c1   0.9894875       0.0014346       0.9862694       0.9919575       
@@ -468,27 +468,27 @@
     37:p ghatchery2012 c1 a   0.9332259       0.0082332       0.9151632       0.9476628       
     38:p ghatchery2010 c1 a   0.9900000       0.0000000       0.9900000       0.9900000      Fixed
 
- To compute parameter estimates, CPU Time was 0.001 seconds and System Time was 0.001 seconds.
+ To compute parameter estimates, CPU Time was 0.016 seconds and System Time was 0.047 seconds.
 
  Attempted ordering of parameters by estimatibility:
    1 12 22 10 11  9 16 14 15 21 18  7 13 19  2 20  8  4 17  3  6  5
  Beta number 5 is a singular value.
 
-   For procedure estimate CPU Time was 6.938 seconds and System Time was 0.937 seconds       .
+   For procedure estimate CPU Time was 7.062 seconds and System Time was 1.078 seconds       .
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:02:13    Page  010
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:24:27    Page  010
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
 
 
   INPUT --- proc stop;
 
-     For this job, CPU Time in minutes was 0.116 and System Time in minutes was 0.016.
+     For this job, CPU Time in minutes was 0.118 and System Time in minutes was 0.018.
 
-     Time Start = 16:02:12.930   Time End = 16:02:13.876
+     Time Start = 10:24:26.591   Time End = 10:24:27.671
 
-     Wall Clock Time in minutes for this job was 0.016.
+     Wall Clock Time in minutes for this job was 0.018.
 
      Maximum of 22 words used of 4096 words allocated.
 

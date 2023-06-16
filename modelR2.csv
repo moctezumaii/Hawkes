@@ -1,30 +1,30 @@
 "","Phi","p","model","npar","AICc","DeltaAICc","weight","Deviance"
-"19","~time * origin * dis + year","~time + year","Phi(~time * origin * dis + year)p(~time + year)",48,13317.4652417882,0,0.999999995254736,13221.214
-"21","~time * origin + origin * dis + year","~time + year","Phi(~time * origin + origin * dis + year)p(~time + year)",33,13355.7987566443,38.3335148560764,4.74223433892672e-09,13289.679
-"17","~time * origin + origin * diff + year","~time + year","Phi(~time * origin + origin * diff + year)p(~time + year)",33,13370.6357566443,53.1705148560759,2.84557080854286e-12,13304.516
-"23","~time * origin * ss + year","~time + year","Phi(~time * origin * ss + year)p(~time + year)",49,13376.1257241748,58.6604823865928,1.8282605777586e-13,13277.864
-"25","~time * origin + year + origin * ss","~time + year","Phi(~time * origin + year + origin * ss)p(~time + year)",33,13386.2107566443,68.7455148560766,1.18059548811274e-15,13320.091
-"20","~time + origin * dis + year","~time + year","Phi(~time + origin * dis + year)p(~time + year)",25,13390.0203481276,72.555106339425,0,13339.951
-"22","~time + origin + year + dis","~time + year","Phi(~time + origin + year + dis)p(~time + year)",24,13390.4500102416,72.9847684534634,0,13342.386
-"9","~time * origin * dis","~time + year","Phi(~time * origin * dis)p(~time + year)",51,13392.1513333333,74.686091545158,0,13289.868
-"11","~time * origin + year","~time + year","Phi(~time * origin + year)p(~time + year)",31,13392.5218697972,75.0566280090497,0,2857.0459
-"5","~time + dis + year","~time + year","Phi(~time + dis + year)p(~time + year)",23,13394.6078862812,77.1426444930294,0,13348.549
-"16","~time + origin * diff + year","~time + year","Phi(~time + origin * diff + year)p(~time + year)",25,13403.8703481276,86.4051063394254,0,13353.801
-"7","~time * origin * diff","~time + year","Phi(~time * origin * diff)p(~time + year)",47,13416.0119741508,98.5467323626472,0,13321.771
-"24","~time + origin * ss + year","~time + year","Phi(~time + origin * ss + year)p(~time + year)",25,13420.2573481276,102.792106339426,0,13370.188
-"18","~time + origin + year + diff","~time + year","Phi(~time + origin + year + diff)p(~time + year)",24,13421.5490102416,104.083768453464,0,13373.485
-"12","~time + origin + year","~time + year","Phi(~time + origin + year)p(~time + year)",23,13426.3338862812,108.868644493028,0,2906.9052
-"26","~time + origin + year + ss","~time + year","Phi(~time + origin + year + ss)p(~time + year)",24,13427.6390102416,110.173768453464,0,13379.575
-"28","~time + year + ss","~time + year","Phi(~time + year + ss)p(~time + year)",23,13433.2248862812,115.759644493028,0,13387.166
-"29","~time + year + ss","~time + year","Phi(~time + year + ss)p(~time + year)",23,13433.2248862812,115.759644493028,0,13387.166
-"14","~time * origin * ss","~time + year","Phi(~time * origin * ss)p(~time + year)",47,13438.5369741508,121.071732362647,0,13344.296
-"6","~time * origin","~time + year","Phi(~time * origin)p(~time + year)",29,13454.3458396116,136.880597823392,0,2922.8836
-"8","~time + origin * diff","~time + year","Phi(~time + origin * diff)p(~time + year)",23,13461.8018862812,144.336644493029,0,13415.743
-"15","~time + origin * ss","~time + year","Phi(~time + origin * ss)p(~time + year)",23,13480.8378862812,163.372644493029,0,13434.779
-"13","~time + origin","~time + year","Phi(~time + origin)p(~time + year)",21,13488.22928,170.764038211824,0,2972.8104
-"10","~time + origin * dis","~time + year","Phi(~time + origin * dis)p(~time + year)",23,13488.8658862812,171.400644493029,0,13442.807
-"4","~time + dis","~time + year","Phi(~time + dis)p(~time + year)",21,13504.65628,187.191038211824,0,13462.607
-"3","~time + ss","~time + year","Phi(~time + ss)p(~time + year)",21,13504.77128,187.306038211824,0,13462.722
-"27","~time + ss","~time + year","Phi(~time + ss)p(~time + year)",21,13504.77128,187.306038211824,0,13462.722
-"2","~origin + year + dis","~time + year","Phi(~origin + year + dis)p(~time + year)",16,13851.6290055985,534.163763810333,0,13819.6
-"1","~1","~time + year","Phi(~1)p(~time + year)",12,13943.1276320166,625.662390228457,0,3445.7409
+"19","~time * origin * dis + I(dis^2) + year","~time + year","Phi(~time * origin * dis + I(dis^2) + year)p(~time + year)",54,13329.5253585511,0,0.999998027210998,13221.208
+"21","~time * origin + origin * dis + year","~time + year","Phi(~time * origin + origin * dis + year)p(~time + year)",33,13355.7987566443,26.2733980932007,1.97152930506185e-06,13289.679
+"17","~time * origin + origin * diff + year","~time + year","Phi(~time * origin + origin * diff + year)p(~time + year)",33,13370.6357566443,41.1103980932003,1.18301328819202e-09,13304.516
+"23","~time * origin * ss + year","~time + year","Phi(~time * origin * ss + year)p(~time + year)",49,13376.1257241748,46.6003656237172,7.600782771853e-11,13277.864
+"25","~time * origin + year + origin * ss","~time + year","Phi(~time * origin + year + origin * ss)p(~time + year)",33,13386.2107566443,56.685398093201,4.9081897601139e-13,13320.091
+"20","~time + origin * dis + year","~time + year","Phi(~time + origin * dis + year)p(~time + year)",25,13390.0203481276,60.4949895765494,7.30598986277052e-14,13339.951
+"22","~time + origin + year + dis","~time + year","Phi(~time + origin + year + dis)p(~time + year)",24,13390.4500102416,60.9246516905878,5.8935791805726e-14,13342.386
+"9","~time * origin * dis","~time + year","Phi(~time * origin * dis)p(~time + year)",51,13392.1513333333,62.6259747822824,2.51733785902299e-14,13289.868
+"11","~time * origin + year","~time + year","Phi(~time * origin + year)p(~time + year)",31,13392.5218697972,62.9965112461741,2.09160916688961e-14,2857.0459
+"5","~time + dis + year","~time + year","Phi(~time + dis + year)p(~time + year)",23,13394.6078862812,65.0825277301537,7.37068434247314e-15,13348.549
+"16","~time + origin * diff + year","~time + year","Phi(~time + origin * diff + year)p(~time + year)",25,13403.8703481276,74.3449895765498,0,13353.801
+"7","~time * origin * diff","~time + year","Phi(~time * origin * diff)p(~time + year)",47,13416.0119741508,86.4866155997715,0,13321.771
+"24","~time + origin * ss + year","~time + year","Phi(~time + origin * ss + year)p(~time + year)",25,13420.2573481276,90.7319895765504,0,13370.188
+"18","~time + origin + year + diff","~time + year","Phi(~time + origin + year + diff)p(~time + year)",24,13421.5490102416,92.0236516905879,0,13373.485
+"12","~time + origin + year","~time + year","Phi(~time + origin + year)p(~time + year)",23,13426.3338862812,96.8085277301525,0,2906.9052
+"26","~time + origin + year + ss","~time + year","Phi(~time + origin + year + ss)p(~time + year)",24,13427.6390102416,98.1136516905881,0,13379.575
+"28","~time + year + ss","~time + year","Phi(~time + year + ss)p(~time + year)",23,13433.2248862812,103.699527730152,0,13387.166
+"29","~time + year + ss","~time + year","Phi(~time + year + ss)p(~time + year)",23,13433.2248862812,103.699527730152,0,13387.166
+"14","~time * origin * ss","~time + year","Phi(~time * origin * ss)p(~time + year)",47,13438.5369741508,109.011615599771,0,13344.296
+"6","~time * origin","~time + year","Phi(~time * origin)p(~time + year)",29,13454.3458396116,124.820481060517,0,2922.8836
+"8","~time + origin * diff","~time + year","Phi(~time + origin * diff)p(~time + year)",23,13461.8018862812,132.276527730153,0,13415.743
+"15","~time + origin * ss","~time + year","Phi(~time + origin * ss)p(~time + year)",23,13480.8378862812,151.312527730153,0,13434.779
+"13","~time + origin","~time + year","Phi(~time + origin)p(~time + year)",21,13488.22928,158.703921448949,0,2972.8104
+"10","~time + origin * dis","~time + year","Phi(~time + origin * dis)p(~time + year)",23,13488.8658862812,159.340527730154,0,13442.807
+"4","~time + dis","~time + year","Phi(~time + dis)p(~time + year)",21,13504.65628,175.130921448948,0,13462.607
+"3","~time + ss","~time + year","Phi(~time + ss)p(~time + year)",21,13504.77128,175.245921448948,0,13462.722
+"27","~time + ss","~time + year","Phi(~time + ss)p(~time + year)",21,13504.77128,175.245921448948,0,13462.722
+"2","~origin + year + dis","~time + year","Phi(~origin + year + dis)p(~time + year)",16,13851.6290055985,522.103647047457,0,13819.6
+"1","~1","~time + year","Phi(~1)p(~time + year)",12,13943.1276320166,613.602273465582,0,3445.7409

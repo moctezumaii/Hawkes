@@ -1,6 +1,6 @@
 
    Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:23    Page  001
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  001
     
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
@@ -24,12 +24,12 @@
 
 
   INPUT --- proc chmatrix occasions= 11 groups= 6 etype= Live Nodes= 
-  INPUT --- 101 icovar = 1 ICMeans  NoHist hist= 412 ;
+  INPUT --- 101 icovar = 1 ICMeans  NoHist hist= 251 ;
 
   INPUT ---    time interval 1.9 6.91 8.33 7.7 5.79 3.87 6.43 3.7 16 22.99 
   INPUT ---    ;
 
-  INPUT ---     icovariates diff  ;
+  INPUT ---     icovariates dis ;
 
   INPUT ---    glabel(1)=originhatchery.year2010;
 
@@ -43,7 +43,7 @@
 
   INPUT ---    glabel(6)=originwild.year2012;
 
-      Number of unique encounter histories read was 412.
+      Number of unique encounter histories read was 251.
 
       Number of individual covariates read was 1.
       Time interval lengths vary and/or not equal to 1.
@@ -54,7 +54,7 @@
    For procedure chmatrix CPU Time was 0.001 seconds and System Time was 0.001 seconds       .
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:23    Page  002
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  002
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
 
@@ -62,7 +62,8 @@
   INPUT --- proc estimate link=Logit NOLOOP varest=2ndPart    ;
 
 
-  INPUT --- model={ Phi(~time + origin * diff + year)p(~time + year) };
+  INPUT --- model={ Phi(~time * origin * dis + I(dis^2) + year)p(~time 
+  INPUT --- + year) };
 
   INPUT ---    fixed=1;
   INPUT ---        parm(88)=0.99 ;
@@ -103,11 +104,11 @@
   INPUT ---        29 30 ;
   INPUT ---        30 ;
 
-
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:23    Page  003
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  003
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
+
   INPUT ---    group=4 Phi    rows=10 cols=10 Triang ;
   INPUT ---        31 32 33 34 35 36 37 38 39 40 ;
   INPUT ---        32 33 34 35 36 37 38 39 40 ;
@@ -153,12 +154,12 @@
   INPUT ---        66 67 68 69 88 ;
   INPUT ---        67 68 69 88 ;
   INPUT ---        68 69 88 ;
-  INPUT ---        69 88 ;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:24    Page  004
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  004
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
+  INPUT ---        69 88 ;
   INPUT ---        88 ;
 
   INPUT ---    group=2 p    rows=10 cols=10 Triang ;
@@ -204,12 +205,12 @@
   INPUT ---        82 83 84 85 86 87 88 ;
   INPUT ---        83 84 85 86 87 88 ;
   INPUT ---        84 85 86 87 88 ;
-  INPUT ---        85 86 87 88 ;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:24    Page  005
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  005
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
+  INPUT ---        85 86 87 88 ;
   INPUT ---        86 87 88 ;
   INPUT ---        87 88 ;
   INPUT ---        88 ;
@@ -226,105 +227,203 @@
   INPUT ---        87 88 ;
   INPUT ---        88 ;
 
-  INPUT ---    design matrix constraints=88 covariates=26;
-  INPUT ---        1 0 0 0 0 0 0 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 1 0 0 0 0 0 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 1 0 0 0 0 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 1 0 0 0 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 1 0 0 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 1 0 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 1 0 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 1 0 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 1 0 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 1 0 diff 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 1 0 0 0 0 0 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 1 0 0 0 0 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 1 0 0 0 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 1 0 0 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 1 0 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 1 0 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 1 0 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 1 0 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 1 1 diff 0 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 1 0 0 0 0 0 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 1 0 0 0 0 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 1 0 0 0 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 1 0 0 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 1 0 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 1 0 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 1 0 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 1 0 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---    design matrix constraints=88 covariates=54;
+  INPUT ---        1 0 0 0 0 0 0 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 1 0 0 0 0 0 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 dis 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 1 0 0 0 0 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 dis 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 1 0 0 0 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 dis 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 1 0 0 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 1 0 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 1 0 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 1 0 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 1 0 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 1 0 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 0 1 dis 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 1 0 0 0 0 0 0 0 0 1 dis 1 0 0 1 0 0 0 0 0 0 0 0 dis 0 0 
+  INPUT ---       0 0 0 0 0 0 dis dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 1 0 0 0 0 0 0 0 1 dis 1 0 0 0 1 0 0 0 0 0 0 0 0 dis 0 
+  INPUT ---       0 0 0 0 0 0 dis 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 1 0 0 0 0 0 0 1 dis 1 0 0 0 0 1 0 0 0 0 0 0 0 0 dis 
+  INPUT ---       0 0 0 0 0 0 dis 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:24    Page  006
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  006
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-  INPUT ---        1 0 0 0 0 0 0 0 0 1 0 diff 1 0 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 1 0 0 0 0 0 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 1 0 0 0 0 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 1 0 0 0 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 1 0 0 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 1 0 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 1 0 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 1 0 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 1 0 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 1 1 diff 1 0 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 1 0 0 0 0 0 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 1 0 0 0 0 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 1 0 0 0 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 1 0 0 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 1 0 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 1 0 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 1 0 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 1 0 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 1 0 diff 0 1 0 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 1 0 0 0 0 0 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 1 0 0 0 0 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 1 0 0 0 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 1 0 0 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 1 0 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 1 0 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 1 0 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 1 0 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        1 0 0 0 0 0 0 0 0 1 1 diff 0 1 diff 0 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0;
+  INPUT ---        1 0 0 0 1 0 0 0 0 0 1 dis 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 dis 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 1 0 0 0 0 1 dis 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 dis 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 1 0 0 0 1 dis 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 
+  INPUT ---       0 dis 0 0 0 dis 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 1 0 0 1 dis 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 
+  INPUT ---       0 0 dis 0 0 dis 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 1 0 1 dis 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+  INPUT ---       0 0 0 dis 0 dis 0 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 1 1 dis 1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+  INPUT ---       0 0 0 0 dis dis 0 0 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 1 0 0 0 0 0 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 dis 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 1 0 0 0 0 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 dis 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 1 0 0 0 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 dis 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 1 0 0 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 1 0 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 1 0 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 1 0 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 1 0 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 1 0 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 0 1 dis 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 1 0 0 0 0 0 0 0 0 1 dis 1 1 0 1 0 0 0 0 0 0 0 0 dis 0 0 
+  INPUT ---       0 0 0 0 0 0 dis dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 1 0 0 0 0 0 0 0 1 dis 1 1 0 0 1 0 0 0 0 0 0 0 0 dis 0 
+  INPUT ---       0 0 0 0 0 0 dis 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 1 0 0 0 0 0 0 1 dis 1 1 0 0 0 1 0 0 0 0 0 0 0 0 dis 
+  INPUT ---       0 0 0 0 0 0 dis 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 1 0 0 0 0 0 1 dis 1 1 0 0 0 0 1 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 dis 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 1 0 0 0 0 1 dis 1 1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 dis 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 1 0 0 0 1 dis 1 1 0 0 0 0 0 0 1 0 0 0 0 0 0 0 
+  INPUT ---       0 dis 0 0 0 dis 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:24    Page  007
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  007
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 1;
-  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 1 0 0 1 dis 1 1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 
+  INPUT ---       0 0 dis 0 0 dis 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 1 0 1 dis 1 1 0 0 0 0 0 0 0 0 1 0 0 0 0 0 
+  INPUT ---       0 0 0 dis 0 dis 0 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 1 1 dis 1 1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 
+  INPUT ---       0 0 0 0 dis dis 0 0 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 1 0 0 0 0 0 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 dis 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 1 0 0 0 0 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 dis 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 1 0 0 0 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 dis 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 1 0 0 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 1 0 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 1 0 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 1 0 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 1 0 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 1 0 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 0 1 dis 1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 1 0 0 0 0 0 0 0 0 1 dis 1 0 1 1 0 0 0 0 0 0 0 0 dis 0 0 
+  INPUT ---       0 0 0 0 0 0 dis dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 1 0 0 0 0 0 0 0 1 dis 1 0 1 0 1 0 0 0 0 0 0 0 0 dis 0 
+  INPUT ---       0 0 0 0 0 0 dis 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 1 0 0 0 0 0 0 1 dis 1 0 1 0 0 1 0 0 0 0 0 0 0 0 dis 
+  INPUT ---       0 0 0 0 0 0 dis 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 1 0 0 0 0 0 1 dis 1 0 1 0 0 0 1 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 0 dis 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 1 0 0 0 0 1 dis 1 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 
+  INPUT ---       dis 0 0 0 0 dis 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 1 0 0 0 1 dis 1 0 1 0 0 0 0 0 1 0 0 0 0 0 0 0 
+  INPUT ---       0 dis 0 0 0 dis 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 1 0 0 1 dis 1 0 1 0 0 0 0 0 0 1 0 0 0 0 0 0 
+  INPUT ---       0 0 dis 0 0 dis 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 1 0 1 dis 1 0 1 0 0 0 0 0 0 0 1 0 0 0 0 0 
+  INPUT ---       0 0 0 dis 0 dis 0 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        1 0 0 0 0 0 0 0 0 1 1 dis 1 0 1 0 0 0 0 0 0 0 0 1 0 0 0 0 
+  INPUT ---       0 0 0 0 dis dis 0 0 0 0 0 0 0 0 dis 0 0 0 0 0 0 0 0 0 0 0;
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  008
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 1 0;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 0 0 0 0 0 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 0 0 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 0 0 0 0 0 1;
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  009
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 0 0 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 0 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 0 1;
+  INPUT ---        0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  INPUT ---       0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0;
   INPUT ---       blabel(1)=Phi:(Intercept);
   INPUT ---       blabel(2)=Phi:time2.9;
   INPUT ---       blabel(3)=Phi:time9.81;
@@ -336,21 +435,54 @@
   INPUT ---       blabel(9)=Phi:time45.63;
   INPUT ---       blabel(10)=Phi:time61.63;
   INPUT ---       blabel(11)=Phi:originwild;
-  INPUT ---       blabel(12)=Phi:diff;
-  INPUT ---       blabel(13)=Phi:year2011;
-  INPUT ---       blabel(14)=Phi:year2012;
-  INPUT ---       blabel(15)=Phi:originwild:diff;
-  INPUT ---       blabel(16)=p:(Intercept);
-  INPUT ---       blabel(17)=p:time9.81;
-  INPUT ---       blabel(18)=p:time18.14;
-  INPUT ---       blabel(19)=p:time25.84;
-  INPUT ---       blabel(20)=p:time31.63;
-  INPUT ---       blabel(21)=p:time35.5;
-  INPUT ---       blabel(22)=p:time41.93;
-  INPUT ---       blabel(23)=p:time45.63;
-  INPUT ---       blabel(24)=p:time61.63;
-  INPUT ---       blabel(25)=p:year2011;
-  INPUT ---       blabel(26)=p:year2012;
+  INPUT ---       blabel(12)=Phi:dis;
+  INPUT ---       blabel(13)=Phi:I(dis^2);
+  INPUT ---       blabel(14)=Phi:year2011;
+  INPUT ---       blabel(15)=Phi:year2012;
+  INPUT ---       blabel(16)=Phi:time2.9:originwild;
+  INPUT ---       blabel(17)=Phi:time9.81:originwild;
+  INPUT ---       blabel(18)=Phi:time18.14:originwild;
+  INPUT ---       blabel(19)=Phi:time25.84:originwild;
+  INPUT ---       blabel(20)=Phi:time31.63:originwild;
+  INPUT ---       blabel(21)=Phi:time35.5:originwild;
+  INPUT ---       blabel(22)=Phi:time41.93:originwild;
+  INPUT ---       blabel(23)=Phi:time45.63:originwild;
+  INPUT ---       blabel(24)=Phi:time61.63:originwild;
+  INPUT ---       blabel(25)=Phi:time2.9:dis;
+  INPUT ---       blabel(26)=Phi:time9.81:dis;
+  INPUT ---       blabel(27)=Phi:time18.14:dis;
+  INPUT ---       blabel(28)=Phi:time25.84:dis;
+  INPUT ---       blabel(29)=Phi:time31.63:dis;
+  INPUT ---       blabel(30)=Phi:time35.5:dis;
+  INPUT ---       blabel(31)=Phi:time41.93:dis;
+  INPUT ---       blabel(32)=Phi:time45.63:dis;
+  INPUT ---       blabel(33)=Phi:time61.63:dis;
+  INPUT ---       blabel(34)=Phi:originwild:dis;
+  INPUT ---       blabel(35)=Phi:time2.9:originwild:dis;
+  INPUT ---       blabel(36)=Phi:time9.81:originwild:dis;
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  010
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
+  INPUT ---       blabel(37)=Phi:time18.14:originwild:dis;
+  INPUT ---       blabel(38)=Phi:time25.84:originwild:dis;
+  INPUT ---       blabel(39)=Phi:time31.63:originwild:dis;
+  INPUT ---       blabel(40)=Phi:time35.5:originwild:dis;
+  INPUT ---       blabel(41)=Phi:time41.93:originwild:dis;
+  INPUT ---       blabel(42)=Phi:time45.63:originwild:dis;
+  INPUT ---       blabel(43)=Phi:time61.63:originwild:dis;
+  INPUT ---       blabel(44)=p:(Intercept);
+  INPUT ---       blabel(45)=p:time9.81;
+  INPUT ---       blabel(46)=p:time18.14;
+  INPUT ---       blabel(47)=p:time25.84;
+  INPUT ---       blabel(48)=p:time31.63;
+  INPUT ---       blabel(49)=p:time35.5;
+  INPUT ---       blabel(50)=p:time41.93;
+  INPUT ---       blabel(51)=p:time45.63;
+  INPUT ---       blabel(52)=p:time61.63;
+  INPUT ---       blabel(53)=p:year2011;
+  INPUT ---       blabel(54)=p:year2012;
   INPUT ---       rlabel(1)=Phi ghatchery2010 c1 a0 t1;
   INPUT ---       rlabel(2)=Phi ghatchery2010 c1 a1.9 t2.9;
   INPUT ---       rlabel(3)=Phi ghatchery2010 c1 a8.81 t9.81;
@@ -358,11 +490,6 @@
   INPUT ---       rlabel(5)=Phi ghatchery2010 c1 a24.84 t25.84;
   INPUT ---       rlabel(6)=Phi ghatchery2010 c1 a30.63 t31.63;
   INPUT ---       rlabel(7)=Phi ghatchery2010 c1 a34.5 t35.5;
-
-  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:24    Page  008
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- 
   INPUT ---       rlabel(8)=Phi ghatchery2010 c1 a40.93 t41.93;
   INPUT ---       rlabel(9)=Phi ghatchery2010 c1 a44.63 t45.63;
   INPUT ---       rlabel(10)=Phi ghatchery2010 c1 a60.63 t61.63;
@@ -384,6 +511,11 @@
   INPUT ---       rlabel(26)=Phi ghatchery2011 c1 a30.63 t31.63;
   INPUT ---       rlabel(27)=Phi ghatchery2011 c1 a34.5 t35.5;
   INPUT ---       rlabel(28)=Phi ghatchery2011 c1 a40.93 t41.93;
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  011
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
   INPUT ---       rlabel(29)=Phi ghatchery2011 c1 a44.63 t45.63;
   INPUT ---       rlabel(30)=Phi ghatchery2011 c1 a60.63 t61.63;
   INPUT ---       rlabel(31)=Phi gwild2011 c1 a0 t1;
@@ -409,11 +541,6 @@
   INPUT ---       rlabel(51)=Phi gwild2012 c1 a0 t1;
   INPUT ---       rlabel(52)=Phi gwild2012 c1 a1.9 t2.9;
   INPUT ---       rlabel(53)=Phi gwild2012 c1 a8.81 t9.81;
-
-  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:24    Page  009
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- 
   INPUT ---       rlabel(54)=Phi gwild2012 c1 a17.14 t18.14;
   INPUT ---       rlabel(55)=Phi gwild2012 c1 a24.84 t25.84;
   INPUT ---       rlabel(56)=Phi gwild2012 c1 a30.63 t31.63;
@@ -435,6 +562,11 @@
   INPUT ---       rlabel(72)=p ghatchery2011 c1 a17.14 t18.14;
   INPUT ---       rlabel(73)=p ghatchery2011 c1 a24.84 t25.84;
   INPUT ---       rlabel(74)=p ghatchery2011 c1 a30.63 t31.63;
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:43    Page  012
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
   INPUT ---       rlabel(75)=p ghatchery2011 c1 a34.5 t35.5;
   INPUT ---       rlabel(76)=p ghatchery2011 c1 a40.93 t41.93;
   INPUT ---       rlabel(77)=p ghatchery2011 c1 a44.63 t45.63;
@@ -449,7 +581,7 @@
   INPUT ---       rlabel(86)=p ghatchery2012 c1 a44.63 t45.63;
   INPUT ---       rlabel(87)=p ghatchery2012 c1 a60.63 t61.63;
   INPUT ---       rlabel(88)=p ghatchery2010 c1 a83.62 t84.62;
-   Model is { Phi(~time + origin * diff + year)p(~time + year) }
+   Model is { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) }
 
  Link Function Used is LOGIT        
 
@@ -457,216 +589,274 @@
  -2logL(saturated) = 0.0000000     
  Effective Sample Size = 18772
 
- Number of function evaluations was 177 for 26 parameters.
- For numerical optimization, CPU Time was 30.234 seconds and System Time was 2.390 seconds.
- -2logL { Phi(~time + origin * diff + year)p(~time + year) } = 13353.801     
- Penalty { Phi(~time + origin * diff + year)p(~time + year) } = 0.0000000     
+ Number of function evaluations was 325 for 54 parameters.
+ For numerical optimization, CPU Time was 86.844 seconds and System Time was 8.532 seconds.
+ -2logL { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 13221.208     
+ Penalty { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 0.0000000     
+ Gradient { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) }:
+ -0.13949875E-02  0.25966016E-02  0.13246565E-02  0.66253401E-03 -0.21007035E-02
+ -0.85106192E-03 -0.51551814E-03 -0.18984080E-02 -0.15572025E-03 -0.38725100E-03
+ -0.38128696E-03 -0.59384411E-02 -0.14312895E-02 -0.64700871E-02 -0.24782533E-02
+  0.47001951E-03  0.37123305E-02 -0.11098667E-02 -0.21462374E-02 -0.33728205E-03
+ -0.25380070E-03 -0.83627394E-03 -0.14545748E-03  0.25372775E-03 -0.55656022E-03
+ -0.24010222E-02 -0.16838640E-02  0.45089514E-03 -0.29601094E-03 -0.34592793E-03
+  0.95681740E-04 -0.72637439E-03 -0.46311793E-03 -0.20286104E-02 -0.23484184E-03
+ -0.14765031E-02 -0.54259296E-03  0.46174316E-03 -0.20782979E-03  0.16401878E-03
+  0.80641566E-04 -0.36710775E-03 -0.69322743E-04  0.61488308E-02  0.19250504E-02
+  0.26236366E-03  0.63735445E-03  0.27273408E-02 -0.16926452E-03  0.53797270E-03
+ -0.43533372E-03  0.85397441E-04  0.79220751E-04  0.41073105E-02
+ Maximum ABS(G) { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 0.0064701     
+ To compute VC matrix, CPU Time was 33.078 seconds and System Time was 3.547 seconds.
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:26    Page  010
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:55    Page  013
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
- Gradient { Phi(~time + origin * diff + year)p(~time + year) }:
-  0.35067608E-02  0.62258834E-04  0.62459741E-03  0.11083189E-03  0.11966249E-03
-  0.68010789E-04  0.32262404E-03  0.37644602E-03  0.82236708E-03  0.99662215E-03
-  0.82960722E-03  0.23442591E-02 -0.14093919E-02  0.53629888E-02  0.41858206E-03
- -0.18227046E-02 -0.13192698E-02  0.13766507E-02 -0.21235777E-03 -0.63287626E-03
-   0.0000000      0.53754924E-03 -0.18119893E-02  0.13589996E-02  0.15747741E-02
- -0.34194279E-02
- Maximum ABS(G) { Phi(~time + origin * diff + year)p(~time + year) } = 0.0053630     
- To compute VC matrix, CPU Time was 7.328 seconds and System Time was 0.578 seconds.
- S Vector { Phi(~time + origin * diff + year)p(~time + year) }:
-   1503.611      1251.309      358.3620      270.8369      264.1929    
-   205.7568      150.5468      142.4344      137.9673      127.7391    
-   99.02927      83.37267      81.79566      78.63954      72.73474    
-   62.23858      57.40339      52.76126      46.51570      43.68383    
-   29.46362      17.46788      12.07959      8.216054      7.458754    
-  0.2362567E-03
+ S Vector { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) }:
+   2463.459      1253.975      422.2217      308.3275      269.6518    
+   245.6614      204.8838      175.4348      150.5237      138.8444    
+   128.2871      107.2005      97.95240      83.74851      79.04468    
+   67.48390      62.89766      58.68021      57.67595      46.65326    
+   46.45934      44.93080      35.33733      34.22130      26.65600    
+   24.26926      20.41144      19.08741      15.84324      13.71966    
+   11.98651      8.441486      8.211691      7.468511      6.731730    
+   5.628938      4.986291      4.419535      3.582321      3.136293    
+   2.727844      1.854879      1.048543     0.7985986     0.6459826    
+  0.4193823     0.2917528     0.2439970     0.4987573E-02 0.5359020E-03
+  0.1521284E-03 0.1005320E-03 0.1976709E-04 0.7395379E-05
  To invert VC matrix, CPU Time was 0.001 seconds and System Time was 0.001 seconds.
- Ratio Threshold = 50.000000       Max Gap (25/26) = 31570.556       Next Max Gap (2/3) = 3.4917466     
- Gap Method for Num. of Estimated Parameters { Phi(~time + origin * diff + year)p(~time + year) } = 25          
- Threshold { Phi(~time + origin * diff + year)p(~time + year) } = 0.0107260               
- Numerical Threshold Method for Num. of Estimated Parameters { Phi(~time + origin * diff + year)p(~time + year) } = 25          
- Number of Estimated Parameters { Phi(~time + origin * diff + year)p(~time + year) } = 25          
- DEVIANCE { Phi(~time + origin * diff + year)p(~time + year) } = 13353.801               
- DEVIANCE Degrees of Freedom { Phi(~time + origin * diff + year)p(~time + year) } = 381          
- c-hat { Phi(~time + origin * diff + year)p(~time + year) } = 35.049346               
- AIC { Phi(~time + origin * diff + year)p(~time + year) } = 13403.801               
- AICc { Phi(~time + origin * diff + year)p(~time + year) } = 13403.870               
- BIC { Phi(~time + origin * diff + year)p(~time + year) } = 13599.804               
- Pearson Chisquare { Phi(~time + origin * diff + year)p(~time + year) } = 0.1177733E+11           
- Possible Encounter Histories { Phi(~time + origin * diff + year)p(~time + year) } = 6144          
- Pearson Chisquare df { Phi(~time + origin * diff + year)p(~time + year) } = 6113          
- Pearson chat { Phi(~time + origin * diff + year)p(~time + year) } = 1926603.1               
- Sum(Observed/Expected) { Phi(~time + origin * diff + year)p(~time + year) } = 0.2944327E+10           
- s-bar { Phi(~time + origin * diff + year)p(~time + year) } = 479687.38               
- Fletcher chat { Phi(~time + origin * diff + year)p(~time + year) } = 4.0163640               
+ Ratio Threshold = 50.000000       Max Gap (48/49) = 48.920996       Next Max Gap (49/50) = 9.3068750     
+ Gap Method for Num. of Estimated Parameters { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 54          
+ Threshold { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 0.0129402               
+ Numerical Threshold Method for Num. of Estimated Parameters { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 48          
+ Number of Estimated Parameters { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 54          
+
+   * *  WARNING  * *   Number of parameters estimated from gap method (=54) and threshold method (=48) differ.  Inspect full output. 
+ Ratios of S Vector { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) }:
+   1/2    1.964520       2/3    2.969945       3/4    1.369393       4/5    1.143428       5/6    1.097656    
+   6/7    1.199028       7/8    1.167863       8/9    1.165496       9/10    1.084118       10/11    1.082294    
+   11/12    1.196703       12/13    1.094414       13/14    1.169602       14/15    1.059508       15/16    1.171312    
+   16/17    1.072916       17/18    1.071872       18/19    1.017412       19/20    1.236268       20/21    1.004174    
+   21/22    1.034020       22/23    1.271483       23/24    1.032612       24/25    1.283812       25/26    1.098344    
+   26/27    1.189003       27/28    1.069367       28/29    1.204767       29/30    1.154783       30/31    1.144591    
+   31/32    1.419953       32/33    1.027984       33/34    1.099508       34/35    1.109449       35/36    1.195915    
+   36/37    1.128883       37/38    1.128239       38/39    1.233707       39/40    1.142215       40/41    1.149733    
+   41/42    1.470632       42/43    1.769005       43/44    1.312979       44/45    1.236254       45/46    1.540319    
+   46/47    1.437457       47/48    1.195723       48/49    48.92100       49/50    9.306875       50/51    3.522696    
+   51/52    1.513233       52/53    5.085829       53/54    2.672897    
+ DEVIANCE { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 13221.208               
+ DEVIANCE Degrees of Freedom { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 197          
+ c-hat { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 67.112731               
+ AIC { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 13317.208               
+ AICc { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 13317.459               
+ BIC { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 13693.534               
+ Pearson Chisquare { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 0.1403026E+11           
+ Possible Encounter Histories { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 6144          
+ Pearson Chisquare df { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 6090          
+ Pearson chat { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 2303819.1               
+ Sum(Observed/Expected) { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 0.3507560E+10           
+ s-bar { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 571449.06               
+ Fletcher chat { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) } = 4.0315318               
 
 
-  LOGIT Link Function Parameters of { Phi(~time + origin * diff + year)p(~time + year) }
+ LOGIT Link Function Parameters of { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) }
                                                               95% Confidence Interval
     Parameter                  Beta         Standard Error     Lower           Upper
  -------------------------  --------------  --------------  --------------  --------------
-    1:Phi:(Intercept)        18.006255       0.0000000       18.006255       18.006255    
-    2:Phi:time2.9           -12.724834       0.0000000      -12.724834      -12.724834    
-    3:Phi:time9.81          -11.898934       0.0000000      -11.898934      -11.898934    
-    4:Phi:time18.14         -12.216808       0.0000000      -12.216808      -12.216808    
-    5:Phi:time25.84         -11.241461       0.0000000      -11.241461      -11.241461    
-    6:Phi:time31.63         -11.564068       0.0000000      -11.564068      -11.564068    
-    7:Phi:time35.5          -13.377949       0.0000000      -13.377949      -13.377949    
-    8:Phi:time41.93         -13.592169       0.0000000      -13.592169      -13.592169    
-    9:Phi:time45.63         -13.546899       0.0000000      -13.546899      -13.546899    
-   10:Phi:time61.63         -13.698085       0.0000000      -13.698085      -13.698085    
-   11:Phi:originwild        -0.3242807       0.0712183      -0.4638686      -0.1846927    
-   12:Phi:diff              -0.1882049       0.0459347      -0.2782370      -0.0981729    
-   13:Phi:year2011           0.0393446       0.0884944      -0.1341045       0.2127936    
-   14:Phi:year2012           0.6615983       0.0879521       0.4892122       0.8339843    
-   15:Phi:originwild:diff    0.3486477       0.0768323       0.1980564       0.4992391    
-   16:p:(Intercept)          3.2192407       0.1258620       2.9725512       3.4659303    
-   17:p:time9.81            -0.2028731       0.1599258      -0.5163277       0.1105816    
-   18:p:time18.14           -0.8621111       0.1431586      -1.1427019      -0.5815203    
-   19:p:time25.84           -0.7244999       0.1462401      -1.0111305      -0.4378693    
-   20:p:time31.63           -0.9288180       0.1421561      -1.2074439      -0.6501921    
-   21:p:time35.5             0.4328330       0.1922379       0.0560467       0.8096192    
-   22:p:time41.93           -0.8166940       0.1471873      -1.1051812      -0.5282069    
-   23:p:time45.63           -0.4147305       0.1640358      -0.7362407      -0.0932203    
+    1:Phi:(Intercept)        11.425906       0.0000000       11.425906       11.425906    
+    2:Phi:time2.9           -14.842898       0.0000000      -14.842898      -14.842898    
+    3:Phi:time9.81          -14.665913       0.0000000      -14.665913      -14.665913    
+    4:Phi:time18.14         -14.292552       0.0000000      -14.292552      -14.292552    
+    5:Phi:time25.84         -10.215086       0.0000000      -10.215086      -10.215086    
+    6:Phi:time31.63         -12.769562       0.0000000      -12.769562      -12.769562    
+    7:Phi:time35.5          -15.812196       0.0000000      -15.812196      -15.812196    
+    8:Phi:time41.93         -16.489984       0.0000000      -16.489984      -16.489984    
+    9:Phi:time45.63         -16.245970       0.0000000      -16.245970      -16.245970    
+   10:Phi:time61.63         -16.337249       0.0000000      -16.337249      -16.337249    
+   11:Phi:originwild         16.608436       0.0000000       16.608436       16.608436    
+   12:Phi:dis                1.3418596       0.0000000       1.3418596       1.3418596    
+   13:Phi:I(dis^2)           8.8932860       0.0000000       8.8932860       8.8932860    
+   14:Phi:year2011           0.7168855       0.1495990       0.4236714       1.0100995    
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:27    Page  011
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:55    Page  014
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-   24:p:time61.63           -0.4371785       0.1740820      -0.7783791      -0.0959778    
-   25:p:year2011             0.5503216       0.0917646       0.3704629       0.7301803    
-   26:p:year2012            -0.1423694       0.0771669      -0.2936167       0.0088778    
+   15:Phi:year2012           0.9210071       0.1090701       0.7072296       1.1347846    
+   16:Phi:time2.9:originwi  -17.699357       0.0000000      -17.699357      -17.699357    
+   17:Phi:time9.81:originw  -16.065962       0.0000000      -16.065962      -16.065962    
+   18:Phi:time18.14:origin  -17.807686       0.0000000      -17.807686      -17.807686    
+   19:Phi:time25.84:origin  -21.068053       0.0000000      -21.068053      -21.068053    
+   20:Phi:time31.63:origin  -17.820024       0.0000000      -17.820024      -17.820024    
+   21:Phi:time35.5:originw  -17.276828       0.0000000      -17.276828      -17.276828    
+   22:Phi:time41.93:origin  -14.910652       0.0000000      -14.910652      -14.910652    
+   23:Phi:time45.63:origin  -16.623546       0.0000000      -16.623546      -16.623546    
+   24:Phi:time61.63:origin  -16.800976       0.0000000      -16.800976      -16.800976    
+   25:Phi:time2.9:dis       -1.0495463       0.0000000      -1.0495463      -1.0495463    
+   26:Phi:time9.81:dis      -1.7074605       0.0000000      -1.7074605      -1.7074605    
+   27:Phi:time18.14:dis     -0.9860872       0.0000000      -0.9860872      -0.9860872    
+   28:Phi:time25.84:dis      2.2464169       0.0000000       2.2464169       2.2464169    
+   29:Phi:time31.63:dis     -3.0208346       0.0000000      -3.0208346      -3.0208346    
+   30:Phi:time35.5:dis      -1.5284845       0.0000000      -1.5284845      -1.5284845    
+   31:Phi:time41.93:dis     -1.0066262       0.0000000      -1.0066262      -1.0066262    
+   32:Phi:time45.63:dis     -1.6184250       0.0000000      -1.6184250      -1.6184250    
+   33:Phi:time61.63:dis     -1.7085175       0.0000000      -1.7085175      -1.7085175    
+   34:Phi:originwild:dis     0.2866840       0.0000000       0.2866840       0.2866840    
+   35:Phi:time2.9:originwi  -1.1244704       0.0000000      -1.1244704      -1.1244704    
+   36:Phi:time9.81:originw   0.5270123       0.0000000       0.5270123       0.5270123    
+   37:Phi:time18.14:origin  -1.0056306       0.0000000      -1.0056306      -1.0056306    
+   38:Phi:time25.84:origin  -4.2559677       0.0000000      -4.2559677      -4.2559677    
+   39:Phi:time31.63:origin   1.1077786       0.0000000       1.1077786       1.1077786    
+   40:Phi:time35.5:originw  -0.4388882       0.0000000      -0.4388882      -0.4388882    
+   41:Phi:time41.93:origin  -0.1829052       0.0000000      -0.1829052      -0.1829052    
+   42:Phi:time45.63:origin  -0.2359019       0.0000000      -0.2359019      -0.2359019    
+   43:Phi:time61.63:origin  -0.2709005       0.0000000      -0.2709005      -0.2709005    
+   44:p:(Intercept)          3.2286050       0.1259348       2.9817728       3.4754371    
+   45:p:time9.81            -0.2048183       0.1600254      -0.5184681       0.1088316    
+   46:p:time18.14           -0.8610857       0.1431540      -1.1416675      -0.5805038    
+   47:p:time25.84           -0.7237391       0.1462429      -1.0103751      -0.4371031    
+   48:p:time31.63           -0.9245939       0.1421518      -1.2032115      -0.6459762    
+   49:p:time35.5             0.4423615       0.1922704       0.0655116       0.8192114    
+   50:p:time41.93           -0.8152640       0.1471797      -1.1037363      -0.5267918    
+   51:p:time45.63           -0.4020314       0.1638967      -0.7232690      -0.0807939    
+   52:p:time61.63           -0.4294376       0.1740840      -0.7706422      -0.0882330    
+   53:p:year2011             0.5408881       0.0918900       0.3607836       0.7209926    
+   54:p:year2012            -0.1590899       0.0770814      -0.3101694      -0.0080104    
 
 
-     Real Function Parameters of { Phi(~time + origin * diff + year)p(~time + year) }
+ Real Function Parameters of { Phi(~time * origin * dis + I(dis^2) + year)p(~time + year) }
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:55    Page  015
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
 
       Following estimates based on unstandardized individual covariate values:
           Variable                 Value        
           ----------------------  ------------- 
-          DIFF                    -0.1256931E-09
+          DIS                     -0.1109058E-09
                                                                95% Confidence Interval
      Parameter                Estimate       Standard Error     Lower           Upper
  --------------------------  --------------  --------------  --------------  --------------
      1:Phi ghatchery2010 c1   1.0000000       0.0000000       1.0000000       1.0000000       
-     2:Phi ghatchery2010 c1   0.9949405       0.6864157E-03   0.9934006       0.9961225       
-     3:Phi ghatchery2010 c1   0.9977784       0.4267835E-03   0.9967633       0.9984757       
-     4:Phi ghatchery2010 c1   0.9969497       0.5201092E-03   0.9957400       0.9978166       
-     5:Phi ghatchery2010 c1   0.9988476       0.3689607E-03   0.9978422       0.9993849       
-     6:Phi ghatchery2010 c1   0.9984096       0.5594612E-03   0.9968324       0.9992021       
-     7:Phi ghatchery2010 c1   0.9903233       0.0011077       0.9878926       0.9922698       
-     8:Phi ghatchery2010 c1   0.9880392       0.0017576       0.9840557       0.9910365       
-     9:Phi ghatchery2010 c1   0.9885625       0.9842034E-03   0.9864636       0.9903392       
-    10:Phi ghatchery2010 c1   0.9867206       0.0010398       0.9845205       0.9886115       
+     2:Phi ghatchery2010 c1   0.9958326       0.0010893       0.9930487       0.9975044       
+     3:Phi ghatchery2010 c1   0.9965062       0.8145655E-03   0.9944847       0.9977885       
+     4:Phi ghatchery2010 c1   0.9975922       0.7340493E-03   0.9956259       0.9986758       
+     5:Phi ghatchery2010 c1   0.9999591       0.1566819E-03   0.9306733       1.0000000       
+     6:Phi ghatchery2010 c1   0.9994740       0.4607242E-03   0.9970765       0.9999055       
+     7:Phi ghatchery2010 c1   0.9890888       0.0017988       0.9849367       0.9921056       
+     8:Phi ghatchery2010 c1   0.9787352       0.0038064       0.9698439       0.9850454       
+     9:Phi ghatchery2010 c1   0.9832625       0.0019485       0.9789827       0.9866826       
+    10:Phi ghatchery2010 c1   0.9816921       0.0020298       0.9772592       0.9852739       
     11:Phi gwild2010 c1 a0    1.0000000       0.0000000       1.0000000       1.0000000       
-    12:Phi gwild2010 c1 a1.   0.9930161       0.9343559E-03   0.9909246       0.9946282       
-    13:Phi gwild2010 c1 a8.   0.9969301       0.5862307E-03   0.9955376       0.9978890       
-    14:Phi gwild2010 c1 a17   0.9957862       0.7135500E-03   0.9941291       0.9969770       
-    15:Phi gwild2010 c1 a24   0.9984070       0.5091566E-03   0.9970207       0.9991487       
-    16:Phi gwild2010 c1 a30   0.9978018       0.7720014E-03   0.9956276       0.9988961       
-    17:Phi gwild2010 c1 a34   0.9866661       0.0015098       0.9833589       0.9893233       
-    18:Phi gwild2010 c1 a40   0.9835332       0.0023949       0.9781183       0.9876251       
-    19:Phi gwild2010 c1 a44   0.9842506       0.0013301       0.9814197       0.9866560       
-    20:Phi gwild2010 c1 a60   0.9817270       0.0014110       0.9787459       0.9842967       
+    12:Phi gwild2010 c1 a1.   0.9876951       0.0021738       0.9826184       0.9913021       
+    13:Phi gwild2010 c1 a8.   0.9979661       0.0011120       0.9940714       0.9993040       
+    14:Phi gwild2010 c1 a17   0.9920562       0.0017176       0.9878739       0.9948036       
+    15:Phi gwild2010 c1 a24   0.9964755       0.0013090       0.9927101       0.9982993       
+    16:Phi gwild2010 c1 a30   0.9982354       0.0014131       0.9915555       0.9996332       
+    17:Phi gwild2010 c1 a34   0.9789299       0.0031864       0.9716899       0.9843481       
+    18:Phi gwild2010 c1 a40   0.9960378       0.0029297       0.9832421       0.9990724       
+    19:Phi gwild2010 c1 a44   0.9830120       0.0021677       0.9781975       0.9867777       
+    20:Phi gwild2010 c1 a60   0.9778908       0.0024358       0.9725774       0.9821935       
     21:Phi ghatchery2011 c1   1.0000000       0.0000000       1.0000000       1.0000000       
-    22:Phi ghatchery2011 c1   0.9951348       0.6649216E-03   0.9936415       0.9962787       
-    23:Phi ghatchery2011 c1   0.9978640       0.4120202E-03   0.9968831       0.9985366       
-    24:Phi ghatchery2011 c1   0.9970670       0.5028559E-03   0.9958963       0.9979044       
-    25:Phi ghatchery2011 c1   0.9988921       0.3553311E-03   0.9979232       0.9994092       
-    26:Phi ghatchery2011 c1   0.9984709       0.5387848E-03   0.9969509       0.9992337       
-    27:Phi ghatchery2011 c1   0.9906931       0.0010798       0.9883198       0.9925878       
-    28:Phi ghatchery2011 c1   0.9884953       0.0017003       0.9846382       0.9913924       
-    29:Phi ghatchery2011 c1   0.9889989       0.9504690E-03   0.9869712       0.9907141       
-    30:Phi ghatchery2011 c1   0.9872263       0.0010161       0.9850736       0.9890721       
+    22:Phi ghatchery2011 c1   0.9979608       0.5158433E-03   0.9966530       0.9987583       
+    23:Phi ghatchery2011 c1   0.9982910       0.3934366E-03   0.9973171       0.9989118       
+    24:Phi ghatchery2011 c1   0.9988229       0.3535487E-03   0.9978798       0.9993468       
+    25:Phi ghatchery2011 c1   0.9999800       0.7648680E-04   0.9649697       1.0000000       
+    26:Phi ghatchery2011 c1   0.9997431       0.2235254E-03   0.9985872       0.9999533       
+    27:Phi ghatchery2011 c1   0.9946425       0.8604255E-03   0.9926626       0.9960902       
+    28:Phi ghatchery2011 c1   0.9895028       0.0018021       0.9853137       0.9925061       
+    29:Phi ghatchery2011 c1   0.9917569       0.8730306E-03   0.9898572       0.9933033       
+    30:Phi ghatchery2011 c1   0.9909762       0.8805181E-03   0.9890763       0.9925482       
     31:Phi gwild2011 c1 a0    1.0000000       0.0000000       1.0000000       1.0000000       
-    32:Phi gwild2011 c1 a1.   0.9932837       0.9821618E-03   0.9910572       0.9949587       
-
-  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:27    Page  012
- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
- 
-    33:Phi gwild2011 c1 a8.   0.9970482       0.5904012E-03   0.9956325       0.9980059       
-    34:Phi gwild2011 c1 a17   0.9959481       0.7273960E-03   0.9942410       0.9971506       
-    35:Phi gwild2011 c1 a24   0.9984683       0.4980717E-03   0.9971040       0.9991904       
-    36:Phi gwild2011 c1 a30   0.9978864       0.7531850E-03   0.9957531       0.9989492       
-    37:Phi gwild2011 c1 a34   0.9871740       0.0016402       0.9835278       0.9900212       
-    38:Phi gwild2011 c1 a40   0.9841584       0.0024826       0.9784807       0.9883560       
-    39:Phi gwild2011 c1 a44   0.9848490       0.0015415       0.9815113       0.9875918       
-    40:Phi gwild2011 c1 a60   0.9824196       0.0016957       0.9787684       0.9854522       
+    32:Phi gwild2011 c1 a1.   0.9939538       0.0011620       0.9911924       0.9958530       
+    33:Phi gwild2011 c1 a8.   0.9990059       0.5471873E-03   0.9970786       0.9996621       
+    34:Phi gwild2011 c1 a17   0.9961055       0.8963532E-03   0.9938882       0.9975203       
+    35:Phi gwild2011 c1 a24   0.9982760       0.6554477E-03   0.9963701       0.9991820       
+    36:Phi gwild2011 c1 a30   0.9991376       0.6946774E-03   0.9958262       0.9998223       
+    37:Phi gwild2011 c1 a34   0.9895999       0.0017817       0.9854595       0.9925703       
+    38:Phi gwild2011 c1 a40   0.9980615       0.0014416       0.9917031       0.9995493       
+    39:Phi gwild2011 c1 a44   0.9916325       0.0012482       0.9887952       0.9937559       
+    40:Phi gwild2011 c1 a60   0.9890812       0.0014525       0.9858345       0.9915901       
     41:Phi ghatchery2012 c1   1.0000000       0.0000000       1.0000000       1.0000000       
-    42:Phi ghatchery2012 c1   0.9973828       0.3751181E-03   0.9965343       0.9980239       
-    43:Phi ghatchery2012 c1   0.9988524       0.2267587E-03   0.9983098       0.9992209       
-    44:Phi ghatchery2012 c1   0.9984236       0.2785604E-03   0.9977714       0.9988852       
-    45:Phi ghatchery2012 c1   0.9994050       0.1925227E-03   0.9988783       0.9996845       
-    46:Phi ghatchery2012 c1   0.9991787       0.2915925E-03   0.9983533       0.9995905       
-    47:Phi ghatchery2012 c1   0.9949831       0.6207925E-03   0.9936071       0.9960640       
-    48:Phi ghatchery2012 c1   0.9937920       0.9585471E-03   0.9916006       0.9954143       
-    49:Phi ghatchery2012 c1   0.9940651       0.5712408E-03   0.9928337       0.9950860       
-    50:Phi ghatchery2012 c1   0.9931031       0.6042894E-03   0.9918118       0.9941920       
-    51:Phi gwild2012 c1 a0    1.0000000       0.0000000       1.0000000       1.0000000       
-    52:Phi gwild2012 c1 a1.   0.9963839       0.5329403E-03   0.9951736       0.9972915       
-    53:Phi gwild2012 c1 a8.   0.9984135       0.3184675E-03   0.9976490       0.9989297       
-    54:Phi gwild2012 c1 a17   0.9978211       0.3929213E-03   0.9968978       0.9984700       
-    55:Phi gwild2012 c1 a24   0.9991773       0.2679120E-03   0.9984428       0.9995655       
-    56:Phi gwild2012 c1 a30   0.9988645       0.4052734E-03   0.9977152       0.9994360       
-    57:Phi gwild2012 c1 a34   0.9930747       0.8952797E-03   0.9910798       0.9946259       
-    58:Phi gwild2012 c1 a40   0.9914344       0.0013576       0.9883193       0.9937241       
-    59:Phi gwild2012 c1 a44   0.9918105       0.8453310E-03   0.9899759       0.9933115       
-    60:Phi gwild2012 c1 a60   0.9904865       0.9108905E-03   0.9885247       0.9921156       
-    61:p ghatchery2010 c1 a   0.9615520       0.0046531       0.9513186       0.9697027       
-    62:p ghatchery2010 c1 a   0.9533081       0.0052884       0.9417777       0.9626456       
-    63:p ghatchery2010 c1 a   0.9134993       0.0075088       0.8976037       0.9271276       
-    64:p ghatchery2010 c1 a   0.9237723       0.0070106       0.9088445       0.9364265       
-    65:p ghatchery2010 c1 a   0.9080807       0.0078193       0.8915638       0.9223011       
-    66:p ghatchery2010 c1 a   0.9747184       0.0039270       0.9657668       0.9813745       
-    67:p ghatchery2010 c1 a   0.9170213       0.0076713       0.9006932       0.9308708       
-    68:p ghatchery2010 c1 a   0.9429191       0.0067773       0.9280897       0.9548391       
-    69:p ghatchery2010 c1 a   0.9416988       0.0076938       0.9246586       0.9550722       
-    70:p ghatchery2011 c1 a   0.9774577       0.0029259       0.9709511       0.9825331       
-    71:p ghatchery2011 c1 a   0.9725269       0.0033649       0.9651035       0.9784065       
-    72:p ghatchery2011 c1 a   0.9482136       0.0050818       0.9372984       0.9573152       
-    73:p ghatchery2011 c1 a   0.9545689       0.0046724       0.9444801       0.9628964       
-    74:p ghatchery2011 c1 a   0.9448383       0.0053151       0.9334457       0.9543760       
-    75:p ghatchery2011 c1 a   0.9852608       0.0024057       0.9797213       0.9893036       
-    76:p ghatchery2011 c1 a   0.9503989       0.0051167       0.9393535       0.9595193       
-    77:p ghatchery2011 c1 a   0.9662627       0.0042611       0.9568365       0.9736870       
-    78:p ghatchery2011 c1 a   0.9655232       0.0047660       0.9548585       0.9737377       
 
   Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
-   gfortran(dble/PIM2) Vers. 10.1 March 2023   9-Jun-2023 16:01:27    Page  013
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:55    Page  016
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
  
-    79:p ghatchery2012 c1 a   0.9559286       0.0051817       0.9445800       0.9650392       
-    80:p ghatchery2012 c1 a   0.9465460       0.0058427       0.9338670       0.9569064       
-    81:p ghatchery2012 c1 a   0.9015672       0.0080801       0.8845563       0.9163086       
-    82:p ghatchery2012 c1 a   0.9131225       0.0076035       0.8970170       0.9269145       
-    83:p ghatchery2012 c1 a   0.8954867       0.0083662       0.8779165       0.9107852       
-    84:p ghatchery2012 c1 a   0.9709626       0.0044303       0.9608990       0.9784941       
-    85:p ghatchery2012 c1 a   0.9055248       0.0083549       0.8878296       0.9206779       
-    86:p ghatchery2012 c1 a   0.9347554       0.0073167       0.9188631       0.9477119       
-    87:p ghatchery2012 c1 a   0.9333729       0.0082204       0.9153366       0.9477860       
+    42:Phi ghatchery2012 c1   0.9983367       0.4170508E-03   0.9972817       0.9989827       
+    43:Phi ghatchery2012 c1   0.9986061       0.3156467E-03   0.9978277       0.9991059       
+    44:Phi ghatchery2012 c1   0.9990400       0.2859806E-03   0.9982791       0.9994647       
+    45:Phi ghatchery2012 c1   0.9999837       0.6236042E-04   0.9712670       1.0000000       
+    46:Phi ghatchery2012 c1   0.9997905       0.1824615E-03   0.9988457       0.9999620       
+    47:Phi ghatchery2012 c1   0.9956273       0.6803753E-03   0.9940695       0.9967773       
+    48:Phi ghatchery2012 c1   0.9914243       0.0014400       0.9880883       0.9938319       
+    49:Phi ghatchery2012 c1   0.9932687       0.6661479E-03   0.9918289       0.9944562       
+    50:Phi ghatchery2012 c1   0.9926301       0.6623344E-03   0.9912116       0.9938210       
+    51:Phi gwild2012 c1 a0    1.0000000       0.0000000       1.0000000       1.0000000       
+    52:Phi gwild2012 c1 a1.   0.9950646       0.8742542E-03   0.9930183       0.9965133       
+    53:Phi gwild2012 c1 a8.   0.9991893       0.4413108E-03   0.9976453       0.9997211       
+    54:Phi gwild2012 c1 a17   0.9968222       0.6906324E-03   0.9951362       0.9979250       
+    55:Phi gwild2012 c1 a24   0.9985939       0.5236447E-03   0.9970838       0.9993225       
+    56:Phi gwild2012 c1 a30   0.9992967       0.5640224E-03   0.9966185       0.9998540       
+    57:Phi gwild2012 c1 a34   0.9915039       0.0013039       0.9885270       0.9937132       
+    58:Phi gwild2012 c1 a40   0.9984188       0.0011688       0.9932867       0.9996290       
+    59:Phi gwild2012 c1 a44   0.9931669       0.8703878E-03   0.9912311       0.9946776       
+    60:Phi gwild2012 c1 a60   0.9910792       0.9503006E-03   0.9890102       0.9927615       
+    61:p ghatchery2010 c1 a   0.9618967       0.0046157       0.9517439       0.9699807       
+    62:p ghatchery2010 c1 a   0.9536372       0.0052595       0.9421673       0.9629219       
+    63:p ghatchery2010 c1 a   0.9143167       0.0074542       0.8985327       0.9278426       
+    64:p ghatchery2010 c1 a   0.9244822       0.0069579       0.9096630       0.9370387       
+    65:p ghatchery2010 c1 a   0.9092087       0.0077333       0.8928695       0.9232700       
+    66:p ghatchery2010 c1 a   0.9751799       0.0038606       0.9663771       0.9817216       
+    67:p ghatchery2010 c1 a   0.9178390       0.0076127       0.9016309       0.9315791       
+    68:p ghatchery2010 c1 a   0.9440950       0.0066012       0.9296570       0.9557108       
+    69:p ghatchery2010 c1 a   0.9426308       0.0075700       0.9258622       0.9557878       
+    70:p ghatchery2011 c1 a   0.9774562       0.0029273       0.9709462       0.9825338       
+    71:p ghatchery2011 c1 a   0.9724730       0.0033817       0.9650098       0.9783800       
+    72:p ghatchery2011 c1 a   0.9482605       0.0050737       0.9373631       0.9573482       
+    73:p ghatchery2011 c1 a   0.9545989       0.0046728       0.9445084       0.9629265       
+    74:p ghatchery2011 c1 a   0.9450544       0.0053000       0.9336928       0.9545640       
+    75:p ghatchery2011 c1 a   0.9853975       0.0023761       0.9799290       0.9893923       
+    76:p ghatchery2011 c1 a   0.9504630       0.0051095       0.9394331       0.9595706       
+    77:p ghatchery2011 c1 a   0.9666720       0.0042182       0.9573375       0.9740196       
+    78:p ghatchery2011 c1 a   0.9657777       0.0047394       0.9551695       0.9739441       
+    79:p ghatchery2012 c1 a   0.9556176       0.0052136       0.9442007       0.9647856       
+    80:p ghatchery2012 c1 a   0.9460734       0.0058910       0.9332912       0.9565205       
+    81:p ghatchery2012 c1 a   0.9010039       0.0081154       0.8839214       0.9158120       
+    82:p ghatchery2012 c1 a   0.9125979       0.0076363       0.8964260       0.9264519       
+    83:p ghatchery2012 c1 a   0.8951932       0.0083816       0.8775923       0.9105214       
+    84:p ghatchery2012 c1 a   0.9710238       0.0044286       0.9609613       0.9785505       
+    85:p ghatchery2012 c1 a   0.9050166       0.0083848       0.8872616       0.9202268       
+    86:p ghatchery2012 c1 a   0.9350804       0.0072933       0.9192353       0.9479928       
+    87:p ghatchery2012 c1 a   0.9333968       0.0082213       0.9153574       0.9478107       
+
+  Program  MARK  - Survival Rate Estimation with Capture-Recapture Data
+   gfortran(dble/PIM2) Vers. 10.1 March 2023  16-Jun-2023 10:25:55    Page  017
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 
     88:p ghatchery2010 c1 a   0.9900000       0.0000000       0.9900000       0.9900000      Fixed
 
- To compute parameter estimates, CPU Time was 0.016 seconds and System Time was 0.016 seconds.
+ To compute parameter estimates, CPU Time was 0.016 seconds and System Time was 0.015 seconds.
 
  Attempted ordering of parameters by estimatibility:
-   1 16 13 26 10 11  9 20 18 14 19 25 22  7 17 12 23  2 24  8  4 21 15  3  6
-   5
- Beta number 5 is a singular value.
+   1 44 14 10 54 11 15  9 48 46 47 53 50  7 45 51  2 34 24 33  8 52 32 23  4
+  12 49 30  3 21 25 16 43  5 27 18 42 17 31 26 22 40 38 35 20 37 36 39 28 13
+   6 19 41 29
+ Beta number 29 is a singular value.
 
-   For procedure estimate CPU Time was 37.609 seconds and System Time was 3.188 seconds       .
+   For procedure estimate CPU Time was 119.969 seconds and System Time was 12.390 seconds       .
 
 
   INPUT --- proc stop;
 
-     For this job, CPU Time in minutes was 0.627 and System Time in minutes was 0.054.
+     For this job, CPU Time in minutes was 2.000 and System Time in minutes was 0.207.
 
-     Time Start = 16:01:23.933   Time End = 16:01:27.143
+     Time Start = 10:25:43.057   Time End = 10:25:55.458
 
-     Wall Clock Time in minutes for this job was 0.053.
+     Wall Clock Time in minutes for this job was 0.207.
 
-     Maximum of 26 words used of 4096 words allocated.
+     Maximum of 54 words used of 4096 words allocated.
 
 
           E X E C U T I O N   S U C C E S S F U L 
