@@ -674,7 +674,9 @@ multi.models= function(){
   Phi.time.origin.year.ss=list(formula=~time+origin+year+ss)
   
   Phi.time.origin.year.diff.2=list(formula=~time*origin*diff+year)
-  Phi.time.origin.year.dis.2=list(formula=~time*origin*dis+year)
+  Phi.time.origin.year.diff.2=list(formula=~time*origin*diff+year)
+  Phi.time.origin.year.dis.2.q=list(formula=~time*origin*dis+I(dis^2)+year)
+ # Phi.time.origin.year.dis.full=list(formula=~time*origin*dis*year)
   Phi.time.origin.year.ss.2=list(formula=~time*origin*ss+year)
   
   Phi.time.origin.year.diff.4=list(formula=~time*origin+origin*diff+year)
@@ -719,7 +721,7 @@ multi.models= function(){
 }    
 
 models=multi.models() 
-saveRDS(models,"newnewmodels.RDS")
+saveRDS(models,"newnewmodels2.RDS")
 #run this to delete junk files
 
 cleanup(ask=F)
@@ -740,8 +742,9 @@ mindis=min(PN_AllYears7$dis)
 maxdis=max(PN_AllYears7$dis)
 dis.values=mindis+(0:30)*(maxdis-mindis)/30
 dis.values
-Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(10))
-
+Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(6))
+Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(62))
+models[[19]]$design.data
 plot(x=c(min(Phibydis$estimates$covdata),min(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata)),y=c(min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl),min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl)),type="n",
      xlab = "Discharge",ylab="Surv")
 
