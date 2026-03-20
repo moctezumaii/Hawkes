@@ -598,6 +598,7 @@ PN_AllYears7=convert.inp('ALLDATAnew.inp',
                          covariates = c("fl", "tagb", "doy", "diff", "dis", "ss"))
 PN_AllYears7<-PN_AllYears7[(which(PN_AllYears7$ch!="10000000000")),]
 
+PN_AllYears7$dis2<-PN_AllYears7$dis
 PN_AllYears7$fl<-(PN_AllYears7$fl-mean(PN_AllYears7$fl))/sd(PN_AllYears7$fl)
 PN_AllYears7$tagb<-(PN_AllYears7$tagb-mean(PN_AllYears7$tagb))/sd(PN_AllYears7$tagb)
 PN_AllYears7$doy<-(PN_AllYears7$doy-mean(PN_AllYears7$doy))/sd(PN_AllYears7$doy)
@@ -674,11 +675,11 @@ multi.models= function(){
   Phi.time.origin.year.dis.sq=list(formula=~time+origin+year+dis+I(dis^2))
   Phi.time.origin.year.ss=list(formula=~time+origin+year+ss)
   
-  Phi.time.origin.year.diff.2=list(formula=~time*origin*diff+year)
-  Phi.time.origin.year.dis.2=list(formula=~time*origin*dis+year)
-  Phi.time.origin.year.dis.2.sq=list(formula=~time*origin*dis+I(dis^2)+year)
+  Phi.time.origin.year.diff.2=list(formula=~time*origin*diff*year)
+  Phi.time.origin.year.dis.2=list(formula=~time*origin*dis*year)
+  Phi.time.origin.year.dis.2.sq=list(formula=~time*origin*dis+I(dis^2)*year)
  # Phi.time.origin.year.dis.full=list(formula=~time*origin*dis*year)
-  Phi.time.origin.year.ss.2=list(formula=~time*origin*ss+year)
+  Phi.time.origin.year.ss.2=list(formula=~time*origin*ss*year)
   
 
   Phi.time.origin.year.diff.3=list(formula=~time+origin*diff+year)
@@ -686,20 +687,20 @@ multi.models= function(){
   Phi.time.origin.year.dis.3.sq=list(formula=~time+origin*dis+I(dis^2)+year)
   Phi.time.origin.year.ss.3=list(formula=~time+origin*ss+year)
 
-  Phi.time.origin.year.diff.4=list(formula=~time*origin+origin*diff+year)
-  Phi.time.origin.year.dis.4=list(formula=~time*origin+origin*dis+year)
-  Phi.time.origin.year.dis.4.sq=list(formula=~time*origin+origin*dis+I(dis^2)+year)
-  Phi.time.origin.year.ss.4=list(formula=~time*origin+year+origin*ss)
+  Phi.time.origin.year.diff.4=list(formula=~time*diff+year+origin)
+  Phi.time.origin.year.dis.4=list(formula=~time*dis+year+origin)
+  Phi.time.origin.year.dis.4.sq=list(formula=~time*dis+I(dis^2)+year+origin)
+  Phi.time.origin.year.ss.4=list(formula=~time*ss+year+origin)
     
   Phi.time.origin.diff=list(formula=~time*origin*diff)
   Phi.time.origin.dis=list(formula=~time*origin*dis)
   Phi.time.origin.dis.sq=list(formula=~time*origin*dis+I(dis^2))
   Phi.time.origin.ss=list(formula=~time*origin*ss)
   
-  Phi.time.origin.diff2=list(formula=~time+origin*diff)
-  Phi.time.origin.dis2=list(formula=~time+origin*dis)
-  Phi.time.origin.dis2.sq=list(formula=~time+origin*dis+I(dis^2))
-  Phi.time.origin.ss2=list(formula=~time+origin*ss)
+  Phi.time.origin.diff2=list(formula=~time*diff+origin)
+  Phi.time.origin.dis2=list(formula=~time*dis+origin)
+  Phi.time.origin.dis2.sq=list(formula=~time*dis+I(dis^2)+origin)
+  Phi.time.origin.ss2=list(formula=~time*ss+origin)
   
   Phi.time.dis=list(formula=~time+dis) #difference in surv between reaches (time) and year 
   Phi.time.dis.year=list(formula=~time+dis+year) #difference in surv between reaches (time) and year 
@@ -732,14 +733,14 @@ multi.models= function(){
 }    
 
 models=multi.models() 
-saveRDS(models,"newnewmodels3.RDS")
+saveRDS(models,"newnewmodels4.RDS")
 #run this to delete junk files
 
 cleanup(ask=F)
 #This is to get the AIC table
 models.table<-as.data.frame(model.table(models))
 models.table
-write.csv(models.table, "modelR3.csv")
+write.csv(models.table, "modelR4.csv")
 #This is to get a specific model:
 #to get the model NAG2017.results$Phi$name.model$p$name.model$results$real
 ###in general model with lowest AIC is explored
@@ -748,52 +749,104 @@ modeltoexplore<-PN_AllYears7.results$Phi.time.origin.fl.year.dis.p.time.fixed$re
 #to save survival results into an excel file:
 write.csv(modeltoexplore, file = "resultsnew2.csv")
 
+
+models<-readRDS("newnewmodels3.RDS")
 ###to explore a covariate
 mindis=min(PN_AllYears7$dis)
 maxdis=max(PN_AllYears7$dis)
 dis.values=mindis+(0:30)*(maxdis-mindis)/30
-dis.values
-Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(7))
+dis.values<-c(-2.2,dis.values)
 #Phibydis2=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(62))
 models[[19]]$design.data
 #plot(x=c(min(Phibydis$estimates$covdata),min(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata)),y=c(min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl),min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl)),type="n",
 #     xlab = "Discharge",ylab="Surv")
+#library(RMark)
 
-plot(x=c(-1,-1,2.75,2.75),y=c(0.9,1,0.9,1),type="n",
-     xlab = "Discharge",ylab="Surv")
+png(filename = "newplot1.png",width = 1200,height=500, pointsize=12,res=110)
+par(mar=c(5,4,2,2)+0.1)
+plot(x=c(0,0,1400,1400),y=c(0.9,1,0.9,1),type="n",
+     xlab = "  ",ylab="",main=NULL,xaxt='n', ann=FALSE)
+Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(7))
+Phibydis$estimates$covdata<-sd(PN_AllYears7$dis2)*Phibydis$estimates$covdata + mean(PN_AllYears7$dis2)
 
 lines(x=Phibydis$estimates$covdata,y=Phibydis$estimates$estimate,type="l",lwd=2)
 polygon(c(Phibydis$estimates$covdata,rev(Phibydis$estimates$covdata)),c(Phibydis$estimates$lcl,rev(Phibydis$estimates$ucl)),col=rgb(0.1, 0.1, 0.1,0.3),border=NA,lwd=2)
 
 #?covariate.predictions
 Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(62))
+Phibydis$estimates$covdata<-sd(PN_AllYears7$dis2)*Phibydis$estimates$covdata + mean(PN_AllYears7$dis2)
 
 lines(x=Phibydis$estimates$covdata,y=Phibydis$estimates$estimate,type="l",lty=3)
 polygon(c(Phibydis$estimates$covdata,rev(Phibydis$estimates$covdata)),c(Phibydis$estimates$lcl,rev(Phibydis$estimates$ucl)),col=rgb(0.6, 0.6, 0.6,0.3),border=NA)
 
+dev.off()
 library(tidyverse)
 models[[19]]$design.data$Phi%>%filter(cohort==1,time==31.63)
 
-
+png(filename = "newplot2.png",width = 1200,height=500, pointsize=12,res=110)
+par(mar=c(5,4,2,2)+0.1)
+plot(x=c(0,0,1400,1400),y=c(0.9,1,0.9,1),type="n",
+     xlab = "  ",ylab="Per rkm probability of survival",main=NULL,xaxt='n')
 ###
-Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(227))
+
+Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(117))
+Phibydis$estimates$covdata<-sd(PN_AllYears7$dis2)*Phibydis$estimates$covdata + mean(PN_AllYears7$dis2)
+
 #Phibydis2=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(62))
 #models[[19]]$design.data
 #plot(x=c(min(Phibydis$estimates$covdata),min(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata)),y=c(min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl),min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl)),type="n",
 #     xlab = "Discharge",ylab="Surv")
 
-plot(x=c(-1,-1,2.75,2.75),y=c(0.9,1,0.9,1),type="n",
-     xlab = "Discharge",ylab="Surv")
+#plot(x=c(-1,-1,2.75,2.75),y=c(0.9,1,0.9,1),type="n",
+#     xlab = "Discharge",ylab="Surv")
+
+#plot(x=c(0,0,1400,1400),y=c(0.9,1,0.9,1),type="n",
+#     xlab = "Discharge",ylab="Surv")
+
+lines(x=Phibydis$estimates$covdata,y=Phibydis$estimates$estimate,type="l",lwd=2)
+polygon(c(Phibydis$estimates$covdata,rev(Phibydis$estimates$covdata)),c(Phibydis$estimates$lcl,rev(Phibydis$estimates$ucl)),col=rgb(0.1, 0.1, 0.1,0.3),border=NA,lwd=2)
+
+#?covariate.predictions
+Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(172))
+Phibydis$estimates$covdata<-sd(PN_AllYears7$dis2)*Phibydis$estimates$covdata + mean(PN_AllYears7$dis2)
+
+lines(x=Phibydis$estimates$covdata,y=Phibydis$estimates$estimate,type="l",lty=3)
+polygon(c(Phibydis$estimates$covdata,rev(Phibydis$estimates$covdata)),c(Phibydis$estimates$lcl,rev(Phibydis$estimates$ucl)),col=rgb(0.6, 0.6, 0.6,0.3),border=NA)
+dev.off()
+
+###
+
+
+png(filename = "newplot3.png",width = 1200,height=500, pointsize=12,res=110)
+par(mar=c(5,4,2,2)+0.1)
+plot(x=c(0,0,1400,1400),y=c(0.9,1,0.9,1),type="n",
+     xlab = parse(text = "Discharge (m^2 *s^-1)"),ylab=" ",main=NULL)
+
+Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(227))
+Phibydis$estimates$covdata<-sd(PN_AllYears7$dis2)*Phibydis$estimates$covdata + mean(PN_AllYears7$dis2)
+
+#Phibydis2=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(62))
+#models[[19]]$design.data
+#plot(x=c(min(Phibydis$estimates$covdata),min(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata),max(Phibydis$estimates$covdata)),y=c(min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl),min(Phibydis$estimates$lcl),max(Phibydis$estimates$ucl)),type="n",
+#     xlab = "Discharge",ylab="Surv")
+
+#plot(x=c(-1,-1,2.75,2.75),y=c(0.9,1,0.9,1),type="n",
+#     xlab = "Discharge",ylab="Surv")
+
+#plot(x=c(0,0,1400,1400),y=c(0.9,1,0.9,1),type="n",
+#     xlab = "Discharge",ylab="Surv")
 
 lines(x=Phibydis$estimates$covdata,y=Phibydis$estimates$estimate,type="l",lwd=2)
 polygon(c(Phibydis$estimates$covdata,rev(Phibydis$estimates$covdata)),c(Phibydis$estimates$lcl,rev(Phibydis$estimates$ucl)),col=rgb(0.1, 0.1, 0.1,0.3),border=NA,lwd=2)
 
 #?covariate.predictions
 Phibydis=covariate.predictions(models[[19]], data= data.frame(dis=dis.values),indices=c(282))
+Phibydis$estimates$covdata<-sd(PN_AllYears7$dis2)*Phibydis$estimates$covdata + mean(PN_AllYears7$dis2)
 
 lines(x=Phibydis$estimates$covdata,y=Phibydis$estimates$estimate,type="l",lty=3)
 polygon(c(Phibydis$estimates$covdata,rev(Phibydis$estimates$covdata)),c(Phibydis$estimates$lcl,rev(Phibydis$estimates$ucl)),col=rgb(0.6, 0.6, 0.6,0.3),border=NA)
 
+dev.off()
 
 mindis=min(PN_AllYears7$fl)
 maxdis=max(PN_AllYears7$fl)
@@ -813,3 +866,70 @@ lines(x=Phibydis2$estimates$covdata,y=Phibydis2$estimates$estimate,type="l")
 polygon(c(Phibydis2$estimates$covdata,rev(Phibydis2$estimates$covdata)),c(Phibydis2$estimates$lcl,rev(Phibydis2$estimates$ucl)),col=rgb(0.4, 0.2, 0.1,0.1),border=NA)
 
 ?covariate.predictions
+
+
+
+PN_AllYears72.process=process.data(PN_AllYears7, model= "CJS", groups=c("origin","year"))
+
+#STEP 5: create design matrix, remove.unused = T (as all fish were released in the same site)
+PN_AllYears72.ddl=make.design.data(PN_AllYears72.process)
+#fix to .99
+PN_AllYears72.ddl$p$fix[PN_AllYears72.ddl$p$Time==81.72]=0.99
+
+
+multi.models2= function(){
+
+Phi.time.origin.year.dis.2=list(formula=~time*origin+year)
+p.time.fixed=list(formula=~time+year)
+cml=create.model.list("CJS")
+
+results=mark.wrapper(cml,data=PN_AllYears7.process,ddl=PN_AllYears7.ddl,adjust=F)
+}    
+
+newuniquemodel=multi.models2() 
+modeltoexplore2<-newuniquemodel[[1]]$results$real#everytime a $ is written, a menu comes out with all the models
+#modeltoexplore<-PN_AllYears7.results$Phi.time.origin.fl.year.dis.p.time.fixed$results$real
+#to save survival results into an excel file:
+write.csv(modeltoexplore2, file = "resultsnew2_delta.csv")
+
+find.covariates(newuniquemodel[[1]], data = NULL, usemean = TRUE)
+rr=get.real(newuniquemodel[[1]],"Phi",vcv=T)
+test<-2:10
+d<-NULL
+
+for (t in test){
+
+d<-c(d,deltamethod.special("prod",rr$estimates$estimate[1:t],rr$vcv.real[1:t,1:t]))
+  }
+
+test<-test+10
+for (t in test){
+  
+  d<-c(d,deltamethod.special("prod",rr$estimates$estimate[1:t],rr$vcv.real[1:t,1:t]))
+}
+
+test<-test+10
+for (t in test){
+  
+  d<-c(d,deltamethod.special("prod",rr$estimates$estimate[1:t],rr$vcv.real[1:t,1:t]))
+}
+
+test<-test+10
+for (t in test){
+  
+  d<-c(d,deltamethod.special("prod",rr$estimates$estimate[1:t],rr$vcv.real[1:t,1:t]))
+}
+
+test<-test+10
+for (t in test){
+  
+  d<-c(d,deltamethod.special("prod",rr$estimates$estimate[1:t],rr$vcv.real[1:t,1:t]))
+}
+
+test<-test+10
+for (t in test){
+  
+  d<-c(d,deltamethod.special("prod",rr$estimates$estimate[1:t],rr$vcv.real[1:t,1:t]))
+}
+write.table(d,"clipboard")
+write.csv(d,"resultsdelta.csv")
