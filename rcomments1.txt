@@ -1,0 +1,138 @@
+Comments exported from: Reviewer1_manuscriptcomments.docm
+Total comments: 19
+============================================================
+
+Comment 1
+Author: Author
+Date: 5/12/2026 2:42:00 PM
+Text commented on: Natural smolts (products of wild spawning, egg planting, or stocked fry) contribute to the migrating cohort each spring
+Comment: It would be helpful to the reader to provide a little more background information regarding the life-history and timing of natural origin smolts in this system somewhere in the introduction. Do these fish have a strict one-year residence in freshwater as juveniles before outmigrating to the ocean? Are there other juvenile life history strategies that buffer the population? It appears these fish were tagged and released across a short window each spring (late April- late May)…Does that represent the peak outmigration timing of juveniles in this system? How do these study fish compare to the majority of smolts outmigrating on any given year? Maybe there is some trapping data to relate the timing of your study fish to when fish would historically outmigrate?
+------------------------------------------------------------
+
+Comment 2
+Author: Author
+Date: 5/13/2026 1:57:00 PM
+Text commented on: During the study period (April 30 to May 30), the median annual discharge was 307.2 m³/s in 2010, 1,088.8 m³/s in 2011, and 708.0 m³/s in 2012 (USGS 2012a).
+Comment: How do these discharge rates compare to the long-term median flow average? Is there a historic median value from the USGS gauge you can relate these to?
+------------------------------------------------------------
+
+Comment 3
+Author: Author
+Date: 5/13/2026 1:59:00 PM
+Text commented on: Figure 1
+Comment: It might be helpful to have the larger study reaches (tidal river, estuary, bay) more clearly labeled in this map. It could be a dotted line next to the labels you have listed in the map
+------------------------------------------------------------
+
+Comment 4
+Author: Author
+Date: 5/13/2026 2:19:00 PM
+Text commented on: postsmolts
+Comment: You mention postsmolts many times, as well as smolts. I assume a smolt becomes a postsmolt once it enters the estuary or bay? You may want to describe the term and when a fish changes from smolt to postsmolt
+------------------------------------------------------------
+
+Comment 5
+Author: Author
+Date: 5/12/2026 2:50:00 PM
+Text commented on: surgical location
+Comment: Were these fish tagged and released the day of capture? You might want to state that here…” Smolts migrating downstream were trapped, collected each morning, and placed into an insulated Xactics tank (Cornwall, Ontario) for transport to the surgical location where they were tagged on the day of capture.”
+------------------------------------------------------------
+
+Comment 6
+Author: Author
+Date: 5/13/2026 2:25:00 PM
+Text commented on: Post-surgery, we held smolts for an average of three hours
+Comment: Were any fish retained for tag retention studies? That would also give you a better idea on survival post capture and surgery. It’s good you removed fish which were not detected at the first receiver line, as that first reach is when many “compromised” fish go missing.
+------------------------------------------------------------
+
+Comment 7
+Author: Author
+Date: 5/13/2026 2:33:00 PM
+Text commented on: not exceeding 8%
+Comment: This seems high, but considering when this study occurred it may have been standard practice. The “rule of thumb” now seems to be no more than 5% tag burden.
+------------------------------------------------------------
+
+Comment 8
+Author: Author
+Date: 5/13/2026 2:52:00 PM
+Text commented on: by merging telemetry detection (date/time) and temperature (date/time) data
+Comment: Was water temperature interpolated for any fish missed at a receiver gate but detected farther downstream?
+------------------------------------------------------------
+
+Comment 9
+Author: Author
+Date: 5/13/2026 2:56:00 PM
+Text commented on: We estimated survival through two tidal riverine, four estuarine, and three bay reaches
+Comment: You have many receivers deployed (129) but report survival in 9 reaches. Did you aggregate nearby receiver sites in the river to improve detection efficiency? What was your reasoning to break up the reaches where you did?
+------------------------------------------------------------
+
+Comment 10
+Author: Author
+Date: 5/13/2026 2:50:00 PM
+Text commented on: Individual-level covariates
+Comment: Why was fish size (FL) not included as an individual level covariate? I think fish size would be significant in the model, and the beta estimate would allow you to interpret how survival changes according to length for both natural and hatchery origin fish.
+------------------------------------------------------------
+
+Comment 11
+Author: Author
+Date: 5/14/2026 11:47:00 AM
+Text commented on: Figure 2
+Comment: It may be useful to show a similar figure of the discharge values you are using in the model, considering that was found to be significant. It would show any variation the smolts are experiencing (if any), rather than reporting one median discharge value for each year.
+------------------------------------------------------------
+
+Comment 12
+Author: Author
+Date: 5/12/2026 3:18:00 PM
+Text commented on: p (reach + year)
+Comment: Was there a reason you didn’t test reach x year as a detection probability model? That has always been the best supported in my experience, as reach-specific detection probability usually differs by reach AND year. The interaction of reach x year may overparameterize the model, but would still be worth comparing using AICc
+------------------------------------------------------------
+
+Comment 13
+Author: Author
+Date: 5/13/2026 3:55:00 PM
+Text commented on: Table 4
+Comment: You mention fork length (FL) as a covariate used in model selection, but I don’t see it here or in the supplemental materials.
+------------------------------------------------------------
+
+Comment 14
+Author: Author
+Date: 5/13/2026 3:58:00 PM
+Text commented on: The cumulative survival of hatchery smolts (range: 0.40–0.69) was greater than that of natural smolts (range: 0.32–0.64) each year in this study
+Comment: Was hatchery smolt survival significantly higher than natural origin smolts through the study area (ie. non overlapping confidence intervals)?
+------------------------------------------------------------
+
+Comment 15
+Author: Author
+Date: 5/13/2026 4:12:00 PM
+Text commented on: Figure 6
+Comment: It’s reported that natural origin smolts had lower survival in relation to high discharge. The flows were much higher in 2011 but this figure shows lower survival in 2010 for natural (and hatchery) origin smolts. Is there something I am missing?
+------------------------------------------------------------
+
+Comment 16
+Author: Author
+Date: 5/13/2026 3:09:00 PM
+Text commented on: Discussion
+Comment: Your survival results are a snapshot in time each spring. It appears you released fish across 7-10 day windows each year. It may be helpful to the reader to put this into context, as survival rates can vary by week within a given season. These results lead me to believe that natural origin smolts have poor survival in general, but I’m guessing this is not the case. It would be helpful to touch on this, the fact that your study window is relatively short, and that natural origin fish have more diversity in outmigration timing compared to hatchery origin fish.
+------------------------------------------------------------
+
+Comment 17
+Author: Author
+Date: 5/13/2026 7:46:00 PM
+Text commented on: this study revealed that hatchery smolts presented higher cumulative and habitat-specific per-rkm survival rates than did natural smolts. Interactions at dams within this watershed have been deemed impactful, with immediate and latent results (Stich et al 2015a).
+Comment: The point estimates of survival per rkm appear lower for natural origin fish, but the confidence intervals overlap between the groups, suggesting that survival is not significantly different between the groups. You may want to mention this somewhere in the discussion.
+------------------------------------------------------------
+
+Comment 18
+Author: Author
+Date: 5/12/2026 3:25:00 PM
+Text commented on: discharge exhibited the greatest interannual variability
+Comment: How much variability was there in discharge if tagged fish were released across such a small window (7-10 days)? I’m assuming river discharge at release was the covariate value assigned to each fish? I’m wondering if the significance of lower survival in relation to higher discharge is being driven by a small percentage of fish that may have experienced low survival during high flows for some reason, which would result in a negative beta coefficient for discharge.
+------------------------------------------------------------
+
+Comment 19
+Author: Author
+Date: 5/14/2026 11:45:00 AM
+Text commented on: numbers
+Comment: And adult returns
+------------------------------------------------------------
+
+
